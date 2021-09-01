@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake</title>
+    <link rel="stylesheet" type="text/css" href="mycss.css">
+</head>
+<body>
+    
+    <canvas id = "GlobalCanvas" width="1250" height="500"></canvas>
+
+    <script>
+        var canvas = document.getElementById("GlobalCanvas")
+        var SnakeCanvas = canvas.getContext("2d")
+        var coord = [[400,400],[420,400],[440,400]]
+        var direction = "Left"
+        var NumberSquares = 3
+        //малюємо змійку
+        var DrowSquare = function (NumberSquares) {
+                for (var i = 0; i != NumberSquares; i++) {
+                    SnakeCanvas.fillStyle = "black"
+                    SnakeCanvas.fillRect(coord[i][0], coord[i][1], 20, 20)
+                    SnakeCanvas.fillStyle = "green"
+                    SnakeCanvas.fillRect(coord[i][0]+2, coord[i][1]+2, 16, 16)
+                }
+            }
+        var DrowSnake = function () {
+            
+            SnakeCanvas.clearRect(0, 0, canvas.width, canvas.height);
+            
+            DrowSquare(NumberSquares)
+            
+            for (var a = NumberSquares-1; a != 0; a--) {
+                coord[a][0] = coord[a-1][0]
+                coord[a][1] = coord[a-1][1]
+            }
+            
+            if (direction == "Up") {
+                coord[0][1] = coord[0][1] - 20
+            }
+            if (direction == "Down") {
+                coord[0][1] = coord[0][1] + 20
+            }
+            if (direction == "Right") {
+                coord[0][0] = coord[0][0] + 20
+            }
+            if (direction == "Left") {
+                coord[0][0] = coord[0][0] - 20
+            }
+        }
+        //
+        var Up = function () {
+            direction = "Up"
+        }
+        var Down = function () {
+            direction = "Down"
+        }
+        var Right = function () {
+            direction = "Right"
+        }
+        var Left = function () {
+            direction = "Left"
+        }
+        //
+        function myFunction() {
+            setInterval(DrowSnake, 100);
+        }
+        
+        myFunction()
+        //DrowSquare(NumberSquares)
+        //DrowSnake()
+    </script>
+    <button onclick="Up()">Вверх</button>
+    <button onclick="Down()">Вниз</button>
+    <button onclick="Right()">Вправо</button>
+    <button onclick="Left()">Вліво</button>
+    
+</body>
+</html>
