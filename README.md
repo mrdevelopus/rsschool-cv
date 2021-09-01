@@ -1,3 +1,3 @@
 # rsschool-cv
 My CV
-mymy
+my my seper
